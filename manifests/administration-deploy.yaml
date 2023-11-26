@@ -1,0 +1,35 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: administration
+  namespace: virtualyou
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: administration
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: administration
+    spec:
+      containers:
+        - name: administration
+          image: dlwhitehurst/administration:0.1.1
+          imagePullPolicy: Always
+          env:
+            - name: USERAUTH_SERVER_PORT_URL
+              value: https://userauth.virtualyou.info
+            - name: DB_HOST
+              value: mariadb.mariadb.svc.cluster.local
+            - name: DB_USERNAME
+              value: 
+            - name: DB_SCHEMA
+              value: 
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: 
+                  name: 

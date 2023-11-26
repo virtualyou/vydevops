@@ -1,0 +1,33 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: userauth
+  namespace: virtualyou
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: userauth
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: userauth
+    spec:
+      containers:
+        - name: userauth
+          image: dlwhitehurst/userauth:0.1.1
+          imagePullPolicy: Always
+          env:
+            - name: DB_HOST
+              value: mariadb.mariadb.svc.cluster.local
+            - name: DB_USERNAME
+              value: 
+            - name: DB_SCHEMA
+              value: 
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: 
+                  name: 

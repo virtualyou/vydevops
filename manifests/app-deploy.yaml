@@ -1,0 +1,22 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: app
+  namespace: virtualyou
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app 
+  template:
+    metadata:
+      labels:
+        app: app 
+    spec:
+      containers:
+        - name: app 
+          image: dlwhitehurst/app:0.1.0
+          imagePullPolicy: Always
+          env:
+            - name: MY_VAR 
+              value: some-value

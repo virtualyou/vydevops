@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    acme.cert-manager.io/http01-edit-in-place: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.org/client-max-body-size: "50m"
+  name: administration-ingress
+  namespace: virtualyou
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: administration.virtualyou.info
+      http:
+        paths:
+          - backend:
+              service:
+                name: administration
+                port:
+                  number: 3005
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - administration.virtualyou.info
+      secretName: administration-tls-prod
