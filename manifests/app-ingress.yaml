@@ -10,17 +10,17 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: app.virtualyou.info
+    - host: src.virtualyou.info
       http:
         paths:
           - backend:
               service:
-                name: app 
+                name: src
                 port:
                   number: 3000 
             path: /
             pathType: Prefix
   tls:
     - hosts:
-        - app.virtualyou.info
-      secretName: app-tls-prod
+        - src.virtualyou.info
+      secretName: src-tls-prod

@@ -14,7 +14,7 @@ spec:
         app: app 
     spec:
       containers:
-        - name: app 
+        - name: src
           image: dlwhitehurst/app:0.1.0
           imagePullPolicy: Always
           env:
